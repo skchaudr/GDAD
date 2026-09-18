@@ -52,11 +52,3 @@ Once fleet state is joined onto graph node data, you get stuck/crash detection f
 ## See Also
 
 - [`docs/transition/live-graph-observability.md`](../transition/live-graph-observability.md) — Original Grok draft this was derived from
-
----
-
-## Resolved Decisions
-
-| Decision | Resolution |
-|---|---|
-| Progress ticks: `acceptance_criteria` or `checkpoints:`? | **`checkpoints:` YAML list.** `acceptance_criteria` is too coarse — it answers "did it work?" not "where is it now?" See [`checkpoints.md`](./checkpoints.md) for authoring rules. |
