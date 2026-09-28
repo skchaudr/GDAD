@@ -39,7 +39,7 @@ Without this run, you go from "are we aligned?" directly to "did we make it?" â€
 ### Final run
 **The formal gate.**
 
-Definitive pass/fail against all `acceptance_criteria`. This run always happens, regardless of how many milestones were hit or what the earlier runs returned. It is the only run that can close the node.
+Definitive pass/fail against all `acceptance_criteria`. This run always happens, regardless of how many milestones were hit or what the earlier runs returned. It is the only run that can provisionally pass the node.
 
 ---
 
