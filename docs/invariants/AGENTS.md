@@ -22,6 +22,10 @@ This file summarizes those guarantees; the linked rules govern if a summary diff
   understanding and exercising authority must be manageable for the operator,
   without requiring internal expertise or an agent as the sole intermediary.
 
+- [Bounded failure consequences](./invariants.md#9-failure-consequences-stay-bounded):
+  block only dependent operations; preserve useful work and evidence rather than
+  automatically restarting execution when a surrounding mechanism fails.
+
 ## Recognize drift before acting
 
 - Changing criteria to pass a retry turns implementation into unauthorized intent.

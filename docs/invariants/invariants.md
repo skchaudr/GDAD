@@ -109,3 +109,18 @@ belong in their own documents, not in this constitution.
   and actionable by the human operator, at a manageable cognitive and interaction
   cost. Exercising authority must not require understanding internal machinery
   or depending on an agent as the sole interpreter or operator.
+
+## 9. Failure consequences stay bounded
+
+- A mechanism's authority to block or mutate must be explicitly assigned and
+  justified by the requirement it protects; participation in an operation grants
+  neither authority.
+- A failure blocks only the operations whose correctness or safety depends on
+  the failed condition. Ancillary failures remain visible without invalidating
+  completed work or preventing unrelated progress.
+- Preserve useful work and evidence. Retrying or discarding work requires
+  justification beyond a surrounding mechanism's failure; recovery must account
+  for the work already done and the finite resources required to repeat it.
+- Missing evaluation evidence prevents claiming evaluated or provisional progress,
+  not preserving the attempt. Recover the failed evaluation where possible rather
+  than automatically discarding the work and restarting execution.
