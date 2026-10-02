@@ -1,0 +1,10 @@
+{
+  "kind": "create_node",
+  "affected_node_ids": [
+    "record-acceptance"
+  ],
+  "rationale": "The attempt found work outside this node's criteria.",
+  "evidence": [
+    "The diff adds a module the criteria do not name."
+  ]
+}

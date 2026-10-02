@@ -1,0 +1,11 @@
+{
+  "kind": "fail",
+  "findings": [
+    {
+      "summary": "The recorded acceptance was not written by a human.",
+      "evidence": [
+        "actor.kind on the acceptance line is system."
+      ]
+    }
+  ]
+}

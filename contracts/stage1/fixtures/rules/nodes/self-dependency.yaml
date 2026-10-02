@@ -1,0 +1,7 @@
+node_id: self-dependency
+why: A node cannot depend on itself.
+depends_on:
+  - self-dependency
+acceptance_criteria:
+  - id: rejected
+    criterion: The contract rejects this node.

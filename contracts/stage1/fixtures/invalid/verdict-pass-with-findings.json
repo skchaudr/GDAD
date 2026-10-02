@@ -1,0 +1,11 @@
+{
+  "kind": "pass",
+  "findings": [
+    {
+      "summary": "The node file has no status field.",
+      "evidence": [
+        "The node keys are node_id, why, depends_on, and acceptance_criteria."
+      ]
+    }
+  ]
+}

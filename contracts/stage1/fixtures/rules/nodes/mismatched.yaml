@@ -1,0 +1,6 @@
+node_id: record-acceptance
+why: The file name is the node id.
+depends_on: []
+acceptance_criteria:
+  - id: recorded
+    criterion: The file stem matches node_id.

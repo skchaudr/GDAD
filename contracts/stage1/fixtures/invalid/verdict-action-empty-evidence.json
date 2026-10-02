@@ -1,0 +1,8 @@
+{
+  "kind": "split",
+  "affected_node_ids": [
+    "record-acceptance"
+  ],
+  "rationale": "The node covers two outcomes.",
+  "evidence": []
+}

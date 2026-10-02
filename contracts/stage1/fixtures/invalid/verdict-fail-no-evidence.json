@@ -1,0 +1,9 @@
+{
+  "kind": "fail",
+  "findings": [
+    {
+      "summary": "The criterion was not met.",
+      "evidence": []
+    }
+  ]
+}

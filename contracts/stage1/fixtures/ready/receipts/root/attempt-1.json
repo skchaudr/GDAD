@@ -1,0 +1,16 @@
+{
+  "project_id": "close-loop",
+  "node_id": "root",
+  "attempt_id": "attempt-1",
+  "generated_at": "2026-10-02T00:04:00Z",
+  "actor": {
+    "kind": "evaluator",
+    "id": "deterministic"
+  },
+  "evidence": [
+    "The root artifact is present in the attempt directory."
+  ],
+  "verdict": {
+    "kind": "pass"
+  }
+}

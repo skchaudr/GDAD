@@ -1,0 +1,8 @@
+node_id: later
+title: Later
+why: Wait until the sibling is accepted.
+depends_on:
+  - sibling
+acceptance_criteria:
+  - id: exists
+    criterion: The later artifact exists.

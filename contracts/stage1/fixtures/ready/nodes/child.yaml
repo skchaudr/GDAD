@@ -1,0 +1,8 @@
+node_id: child
+title: Child
+why: Continue after the root is accepted.
+depends_on:
+  - root
+acceptance_criteria:
+  - id: exists
+    criterion: The child artifact exists.

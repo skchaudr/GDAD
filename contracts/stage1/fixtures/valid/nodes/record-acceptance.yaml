@@ -1,0 +1,6 @@
+node_id: record-acceptance
+why: A human can accept this node from a separate acceptance line.
+depends_on: []
+acceptance_criteria:
+  - id: recorded
+    criterion: A human acceptance line names this node.

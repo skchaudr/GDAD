@@ -1,0 +1,4 @@
+node_id: record-acceptance
+why: A node needs a criterion an evaluation can judge.
+depends_on: []
+acceptance_criteria: []

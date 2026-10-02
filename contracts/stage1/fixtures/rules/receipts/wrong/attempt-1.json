@@ -1,0 +1,16 @@
+{
+  "project_id": "close-loop",
+  "node_id": "record-acceptance",
+  "attempt_id": "attempt-1",
+  "generated_at": "2026-10-02T00:04:00Z",
+  "actor": {
+    "kind": "evaluator",
+    "id": "deterministic"
+  },
+  "evidence": [
+    "The receipt directory does not match node_id."
+  ],
+  "verdict": {
+    "kind": "pass"
+  }
+}

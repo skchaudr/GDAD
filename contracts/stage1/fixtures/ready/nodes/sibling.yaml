@@ -1,0 +1,7 @@
+node_id: sibling
+title: Sibling
+why: Run beside the root, with no dependencies.
+depends_on: []
+acceptance_criteria:
+  - id: exists
+    criterion: The sibling artifact exists.

@@ -1,0 +1,7 @@
+node_id: root
+title: Root
+why: Start the graph.
+depends_on: []
+acceptance_criteria:
+  - id: exists
+    criterion: The root artifact exists.

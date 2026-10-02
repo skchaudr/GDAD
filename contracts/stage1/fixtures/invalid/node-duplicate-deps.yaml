@@ -1,0 +1,8 @@
+node_id: record-acceptance
+why: A dependency is named once.
+depends_on:
+  - root
+  - root
+acceptance_criteria:
+  - id: recorded
+    criterion: A human acceptance line names this node.

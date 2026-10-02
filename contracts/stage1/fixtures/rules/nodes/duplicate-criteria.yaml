@@ -1,0 +1,8 @@
+node_id: duplicate-criteria
+why: Criterion ids are unique within a node.
+depends_on: []
+acceptance_criteria:
+  - id: same
+    criterion: First statement.
+  - id: same
+    criterion: Second statement.

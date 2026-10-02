@@ -1,0 +1,2 @@
+{"project_id":"close-loop","node_id":"root","status":"dispatched","at":"2026-10-02T00:01:00Z","actor":{"kind":"system","id":"gdad"}}
+{"project_id":"close-loop","node_id":"sibling","status":"dispatched","at":"2026-10-02T00:02:00Z","actor":{"kind":"human","id":"operator"},"reason":"Start the sibling attempt."}

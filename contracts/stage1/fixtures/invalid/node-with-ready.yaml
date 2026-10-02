@@ -1,0 +1,8 @@
+node_id: record-acceptance
+why: Ready-work is computed from dependencies, acceptance, and the journal.
+depends_on: []
+acceptance_criteria:
+  - id: recorded
+    criterion: A human acceptance line names this node.
+ready:
+  - record-acceptance

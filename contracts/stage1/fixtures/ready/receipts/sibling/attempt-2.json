@@ -1,0 +1,16 @@
+{
+  "project_id": "close-loop",
+  "node_id": "sibling",
+  "attempt_id": "attempt-2",
+  "generated_at": "2026-10-02T00:03:00Z",
+  "actor": {
+    "kind": "evaluator",
+    "id": "deterministic"
+  },
+  "evidence": [
+    "The sibling artifact is present in the attempt directory."
+  ],
+  "verdict": {
+    "kind": "pass"
+  }
+}
