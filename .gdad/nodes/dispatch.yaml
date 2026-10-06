@@ -1,0 +1,20 @@
+id: dispatch
+title: Ready and dispatch
+why: >
+  A ready node has to reach an executor with its constraints placed, and the
+  dispatch has to be observable — a request to dispatch is not evidence it ran.
+depends_on: [graph-reader]
+acceptance_criteria:
+  - id: ac-1
+    criterion: "`gdad ready <node>` journals the node as ready for any executor to pick up; it spawns nothing."
+  - id: ac-2
+    criterion: "`gdad dispatch <node> --executor <name>` writes a task packet (node + relevant AGENTS.md invariants, no evaluator material) and invokes the executor command template from config; the journal records attempt id, executor, and base commit."
+  - id: ac-3
+    criterion: "A dispatch whose executor never produces a branch, commit, or attempt directory shows as dispatched-without-evidence in `gdad status`, not as in progress."
+  - id: ac-4
+    criterion: "Two executors are configurable without code changes (e.g. claude -p and pi)."
+constraints:
+  - GDAD does not supervise, retry, kill, or manage worktrees for the executor (invariant 7).
+  - Dispatch refuses nodes that are not on the frontier.
+required_artifacts:
+  - the packet for one real dispatch of a node in this graph

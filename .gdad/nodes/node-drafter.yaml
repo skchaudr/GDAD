@@ -1,0 +1,19 @@
+id: node-drafter
+title: Node drafting tool
+why: >
+  Authoring nodes by hand is the bottleneck between intent and dispatch.
+  Agents may draft; only a human adopts a draft into the graph.
+depends_on: [graph-reader]
+acceptance_criteria:
+  - id: ac-1
+    criterion: "`gdad draft \"<prose>\"` writes a node YAML to .gdad/proposals/, never to .gdad/nodes/."
+  - id: ac-2
+    criterion: "Every draft passes `gdad check` rules before it is written; invalid output is reported, not silently repaired."
+  - id: ac-3
+    criterion: "Each drafted acceptance criterion names how it is checked (command, file, or observable behavior); the drafter flags any criterion it cannot make checkable instead of emitting prose."
+  - id: ac-4
+    criterion: "`gdad adopt <proposal>` is the only path from proposals/ to nodes/; proposals are invisible to the frontier."
+constraints:
+  - Model provider is configuration, not code.
+required_artifacts:
+  - one real node in this graph that was drafted then adopted

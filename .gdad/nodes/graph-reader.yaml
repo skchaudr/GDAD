@@ -1,0 +1,28 @@
+id: graph-reader
+title: Graph reader, journal, frontier
+why: >
+  Everything else reads the graph. Until a node set can be loaded, validated,
+  and its frontier computed, nothing else has a substrate to stand on.
+depends_on: []
+acceptance_criteria:
+  - id: ac-1
+    criterion: "`gdad check` loads .gdad/project.yaml and nodes/*.yaml and exits non-zero naming the offending node for: duplicate id, unresolved depends_on, dependency cycle, missing acceptance_criteria."
+  - id: ac-2
+    criterion: "Machine progress is an append-only JSONL journal outside the repo (~/.gdad/state/<project>/journal.jsonl); every line carries ts, actor, node, status, and reason. Nothing rewrites prior lines."
+  - id: ac-3
+    criterion: "`gdad status` prints each node with its derived state (blocked / ready / dispatched / provisional / failed / accepted) computed from the journal + committed acceptance + depends_on; nothing derivable is stored."
+  - id: ac-4
+    criterion: "A dependency counts as satisfied when it is accepted or provisional."
+  - id: ac-5
+    criterion: "Runs on a fresh machine with only uv (or python3 + PyYAML) installed."
+constraints:
+  - No status field in any node or project YAML.
+  - Single entry point; no database, no daemon.
+required_artifacts:
+  - gdad CLI entry point
+  - tests covering each ac-1 rejection case and frontier derivation
+milestones:
+  - id: ms-1
+    description: Loader + validator with failing-case tests
+  - id: ms-2
+    description: Journal append + frontier derivation; `gdad status` prints this graph

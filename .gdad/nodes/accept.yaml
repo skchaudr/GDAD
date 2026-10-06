@@ -1,0 +1,17 @@
+id: accept
+title: Human accept and reject
+why: >
+  The human completion gate is the one transition nothing else may perform.
+  It must exist before anything can produce provisional work worth judging.
+depends_on: [graph-reader]
+acceptance_criteria:
+  - id: ac-1
+    criterion: "`gdad accept <node>` refuses to run without an interactive TTY, shows the latest receipt, and on confirmation commits the acceptance into .gdad/ under the operator's git identity."
+  - id: ac-2
+    criterion: "`gdad reject <node> [--note]` journals the node back to ready with the note as a fix-list; downstream provisional nodes show as blocked again by pure derivation, with no cascade mechanism."
+  - id: ac-3
+    criterion: "Revoking an acceptance is a human-only command and is itself a commit."
+constraints:
+  - No code path other than accept writes acceptance.
+required_artifacts:
+  - tests for TTY refusal and reject re-freezing downstream

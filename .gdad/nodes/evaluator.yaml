@@ -1,0 +1,20 @@
+id: evaluator
+title: Evaluator — final verdict and receipt
+why: >
+  Provisional progress without a human watching is only safe if an independent
+  judgment, bound to the actual attempt, exists as a durable file.
+depends_on: [graph-reader, accept]
+acceptance_criteria:
+  - id: ac-1
+    criterion: "`gdad eval <node> <attempt-ref>` builds its context at one construction point from the main checkout's node, its graph neighborhood, and the attempt diff — never the executor transcript, packet framing, or acceptance status (a contract test asserts this)."
+  - id: ac-2
+    criterion: "Writes an immutable receipt bound to the attempt's commit SHA with verdict in {pass, fail, split, supersede, insert_prerequisite, revise_criteria, rewire, reorder, create_node, retire_node}; every non-pass verdict cites evidence."
+  - id: ac-3
+    criterion: "Only a pass verdict journals the node provisional; a failed or interrupted evaluation leaves an explicit unevaluated state and preserves the attempt."
+  - id: ac-4
+    criterion: "A deterministic lane reports files touched outside the node's scope and any write to .gdad/ as observations, without blocking the semantic verdict."
+constraints:
+  - The evaluator never halts, kills, or redirects execution (invariant 3).
+  - Graph actions are recommendations; nothing mutates the graph.
+required_artifacts:
+  - one receipt on a real attempt from this graph

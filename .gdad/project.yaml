@@ -1,0 +1,16 @@
+project_id: gdad
+title: GDAD — self-hosted graph
+why: >
+  GDAD's own build, tracked as a GDAD graph from day one. Dogfooding is the
+  proof: if this graph can't drive its own construction, the design is wrong.
+repo: .
+# Status is not stored here or in nodes. Machine progress lives in
+# ~/.gdad/state/gdad/journal.jsonl; `accepted` is the only status committed
+# to git, via the human accept command (roadmap §4).
+nodes:
+  - graph-reader
+  - accept
+  - node-drafter
+  - dispatch
+  - evaluator
+  - milestone-beat
