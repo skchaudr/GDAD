@@ -1,17 +1,23 @@
 id: accept
-title: Human accept and reject
+title: Human accept, reject, revoke
 why: >
   The human completion gate is the one transition nothing else may perform.
   It must exist before anything can produce provisional work worth judging.
 depends_on: [graph-reader]
 acceptance_criteria:
   - id: ac-1
-    criterion: "`gdad accept <node>` refuses to run without an interactive TTY, shows the latest receipt, and on confirmation commits the acceptance into .gdad/ under the operator's git identity."
+    criterion: "`gdad accept <node>` refuses to run without an interactive TTY, shows the node's latest receipt (or states plainly that no evaluation evidence exists), and on confirmation commits .gdad/acceptance/<node>.yaml under the operator's git identity."
   - id: ac-2
-    criterion: "`gdad reject <node> [--note]` journals the node back to ready with the note as a fix-list; downstream provisional nodes show as blocked again by pure derivation, with no cascade mechanism."
+    criterion: "The acceptance record is self-describing without machine state: node id, accepted commit SHA, receipt digest and verdict (or `evidence: none`), operator, timestamp."
   - id: ac-3
-    criterion: "Revoking an acceptance is a human-only command and is itself a commit."
+    criterion: "`gdad accept` refuses a node whose dependencies are not all accepted, naming them."
+  - id: ac-4
+    criterion: "`gdad reject <node> --note <text>` journals the node back to ready with the note as a fix-list; dependents that relied on its provisional state derive back to blocked with no cascade mechanism, and their attempts are left untouched."
+  - id: ac-5
+    criterion: "`gdad revoke <node>` is the only way to undo acceptance; it requires a TTY and commits removal of the acceptance record."
+  - id: ac-6
+    criterion: "Every successful accept also runs `gdad export`, writing the journal and receipts to a single archive; `gdad restore <archive>` round-trips it (tested)."
 constraints:
-  - No code path other than accept writes acceptance.
+  - No code path other than accept and revoke writes .gdad/acceptance/.
 required_artifacts:
-  - tests for TTY refusal and reject re-freezing downstream
+  - tests for TTY refusal, unaccepted-dependency refusal, reject re-freezing dependents, and export/restore round-trip

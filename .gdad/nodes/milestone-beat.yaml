@@ -1,21 +1,21 @@
 id: milestone-beat
 title: Milestone-beat evaluation schedule
 why: >
-  A final-only verdict is detection after the fact. Scoped evaluations at
-  authored milestones surface drift while it is cheap to act on.
-depends_on: [evaluator, dispatch]
+  A final-only verdict is detection after the fact. Scoped evaluations while
+  the attempt runs surface drift while it is cheap to act on.
+depends_on: [evaluator, dispatch, align-observability-docs]
 acceptance_criteria:
   - id: ac-1
-    criterion: "A beat is observable without executor cooperation: a new commit on the attempt branch is a beat; a commit trailer `GDAD-Milestone: <ms-id>` names the milestone when the executor supplies one."
+    criterion: "A beat is a new commit on attempt/<attempt_id>, found by polling git. Only committed work is observed; the executor's process, transcript, logs, uncommitted files, and commit-message claims are outside the boundary."
   - id: ac-2
-    criterion: "Each beat appends a scoped evaluation record (first milestone = alignment, last milestone = integrity) to the attempt's record stream; the final verdict still runs at completion and is the only record that can mark provisional."
+    criterion: "The executor is not told the milestones. At each evaluated beat the evaluator judges which authored milestones are actually reached at that SHA, citing evidence, plus alignment (first beat) or integrity (later beats). Each result is an appended record in the attempt's record stream."
   - id: ac-3
-    criterion: "Nodes without milestones get at most one mid-run beat, triggered by commit count or elapsed time from config."
+    criterion: "Beats are rate-limited by config (minimum commits or minimum interval between evaluated beats); unevaluated beats are still listed. Nodes without milestones get alignment and integrity checks only."
   - id: ac-4
-    criterion: "An attempt whose executor died without a completion signal still receives a final verdict on the next tick."
+    criterion: "When the attempt ref has been idle past a configured window, or the dispatch journal records executor exit, the next tick runs the final verdict. The final verdict is the only record that can mark provisional."
   - id: ac-5
-    criterion: "Beat records are observations; none pauses, redirects, or retries the executor."
+    criterion: "Beat records are observations surfaced in `gdad status`. GDAD never sends them to the executor, and none pauses, redirects, or retries it."
 constraints:
   - The scheduler is a poll over git and the journal; it needs no hooks into executor internals.
 required_artifacts:
-  - a record stream with at least two beats and a final verdict on a real attempt
+  - a record stream with at least two evaluated beats and a final verdict on a real attempt

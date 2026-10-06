@@ -14,3 +14,5 @@ nodes:
   - dispatch
   - evaluator
   - milestone-beat
+  - align-observability-docs
+# Bootstrap order and the first integrated proof: BOOTSTRAP.md

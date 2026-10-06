@@ -6,13 +6,15 @@ why: >
 depends_on: [graph-reader, accept]
 acceptance_criteria:
   - id: ac-1
-    criterion: "`gdad eval <node> <attempt-ref>` builds its context at one construction point from the main checkout's node, its graph neighborhood, and the attempt diff — never the executor transcript, packet framing, or acceptance status (a contract test asserts this)."
+    criterion: "`gdad eval <node> <attempt-ref>` builds its context at one construction point from the main checkout's node, its graph neighborhood, and git objects reachable from the attempt ref (diff against base, files at head). It never reads the executor transcript, logs, packet, self-reported status, or acceptance records (a contract test asserts this)."
   - id: ac-2
-    criterion: "Writes an immutable receipt bound to the attempt's commit SHA with verdict in {pass, fail, split, supersede, insert_prerequisite, revise_criteria, rewire, reorder, create_node, retire_node}; every non-pass verdict cites evidence."
+    criterion: "Writes an immutable receipt, atomically (temp file + rename), bound to the evaluated commit SHA, with verdict in {pass, fail, split, supersede, insert_prerequisite, revise_criteria, rewire, reorder, create_node, retire_node}. Every non-pass verdict cites evidence; a later receipt supersedes, nothing is overwritten."
   - id: ac-3
-    criterion: "Only a pass verdict journals the node provisional; a failed or interrupted evaluation leaves an explicit unevaluated state and preserves the attempt."
+    criterion: "Only a pass verdict journals the node provisional. An evaluation that errors or is interrupted writes no receipt, journals eval-error with the reason, leaves the node unevaluated, and preserves the attempt; rerunning `gdad eval` on the same SHA is the recovery, not re-dispatch."
   - id: ac-4
-    criterion: "A deterministic lane reports files touched outside the node's scope and any write to .gdad/ as observations, without blocking the semantic verdict."
+    criterion: "A deterministic lane records files touched outside the node's declared scope and any write to .gdad/ as observations in the receipt, without blocking the semantic verdict."
+  - id: ac-5
+    criterion: "`gdad eval` also runs on a plain commit range with no dispatch record, so bootstrap nodes can be evaluated after the fact; such receipts are observations and never change acceptance."
 constraints:
   - The evaluator never halts, kills, or redirects execution (invariant 3).
   - Graph actions are recommendations; nothing mutates the graph.

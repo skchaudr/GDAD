@@ -1,0 +1,20 @@
+id: align-observability-docs
+title: Align observability docs with the invariants
+why: >
+  evaluator-cadence.md and milestones.md tell the reader that the evaluator
+  pauses, stops, redirects, or retries the agent. That contradicts invariants
+  3 and 7, and an agent building milestone-beat from these docs would build the
+  forbidden behavior. Held as the first integrated proof (see BOOTSTRAP.md).
+depends_on: []
+acceptance_criteria:
+  - id: ac-1
+    criterion: "No sentence in docs/observability/ assigns the evaluator or GDAD authority to pause, stop, kill, redirect, retry, or pass context back to an executor; evaluator results are described as recorded observations and verdicts."
+  - id: ac-2
+    criterion: "milestones.md describes a milestone as reached by evaluator judgment over committed work, consistent with the milestone-beat node, and still states that the executor does not know the milestones."
+  - id: ac-3
+    criterion: "The three-run cadence (early, near-end, final) and the acceptance_criteria vs milestones distinction are preserved."
+constraints:
+  - Touch only docs/observability/evaluator-cadence.md and docs/observability/milestones.md.
+  - Do not edit docs/invariants/ or AGENTS.md.
+required_artifacts:
+  - one commit on the attempt ref changing only the two files

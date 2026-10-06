@@ -1,5 +1,5 @@
 id: dispatch
-title: Ready and dispatch
+title: Ready and dispatch (one executor)
 why: >
   A ready node has to reach an executor with its constraints placed, and the
   dispatch has to be observable — a request to dispatch is not evidence it ran.
@@ -8,13 +8,13 @@ acceptance_criteria:
   - id: ac-1
     criterion: "`gdad ready <node>` journals the node as ready for any executor to pick up; it spawns nothing."
   - id: ac-2
-    criterion: "`gdad dispatch <node> --executor <name>` writes a task packet (node + relevant AGENTS.md invariants, no evaluator material) and invokes the executor command template from config; the journal records attempt id, executor, and base commit."
+    criterion: "`gdad dispatch <node>` writes a task packet (node id, title, why, acceptance_criteria, constraints, required_artifacts, and the AGENTS.md invariants that apply) and runs the executor command template from config with {packet}, {attempt_id}, and {base} substituted. Milestones and evaluator material are not in the packet."
   - id: ac-3
-    criterion: "A dispatch whose executor never produces a branch, commit, or attempt directory shows as dispatched-without-evidence in `gdad status`, not as in progress."
+    criterion: "The attempt's evidence is the git ref attempt/<attempt_id>. The journal records attempt id, executor, base SHA, and on exit the executor's exit code and the ref's head (or its absence). An attempt whose ref never appears shows as dispatched-without-evidence."
   - id: ac-4
-    criterion: "Two executors are configurable without code changes (e.g. claude -p and pi)."
+    criterion: "Dispatch refuses a node that is off the frontier or already accepted, and refuses a base commit that does not contain every dependency's evidenced SHA (accepted SHA or passing receipt SHA), naming the missing one. It checks ancestry; it never builds the base."
 constraints:
-  - GDAD does not supervise, retry, kill, or manage worktrees for the executor (invariant 7).
-  - Dispatch refuses nodes that are not on the frontier.
+  - GDAD does not supervise, retry, kill, or manage worktrees for the executor (invariant 7). Workspace setup belongs in the executor command template.
+  - One executor. A second executor is later work, not this node.
 required_artifacts:
-  - the packet for one real dispatch of a node in this graph
+  - the packet and journal lines for one real dispatch of a node in this graph
