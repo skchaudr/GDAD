@@ -8,7 +8,7 @@ acceptance_criteria:
   - id: ac-1
     criterion: "A beat is a new commit on attempt/<attempt_id>, found by polling git. Only committed work is observed; the executor's process, transcript, logs, uncommitted files, and commit-message claims are outside the boundary."
   - id: ac-2
-    criterion: "The executor is not told the milestones. At each evaluated beat the evaluator judges which authored milestones are actually reached at that SHA, citing evidence, plus alignment (first beat) or integrity (later beats). Each result is an appended record in the attempt's record stream."
+    criterion: "The executor is not told the milestones... (wait what lol, why, how are we hiding that while also getting the executor to reliably hit the milestones...) At each evaluated beat the evaluator judges which authored milestones are actually reached at that SHA, citing evidence, plus alignment (first beat) or integrity (later beats). Each result is an appended record in the attempt's record stream."
   - id: ac-3
     criterion: "Beats are rate-limited by config (minimum commits or minimum interval between evaluated beats); unevaluated beats are still listed. Nodes without milestones get alignment and integrity checks only."
   - id: ac-4
