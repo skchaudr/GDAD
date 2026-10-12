@@ -1,3 +1,9 @@
+---
+title: "000 — GDAD build path (opening handoff)"
+date: 2026-10-12
+tags: []
+---
+
 # 000 — GDAD build path (opening handoff)
 
 Format follows `gddp-config/.handoffs/000-template.md`. This handoff opens the
@@ -49,27 +55,43 @@ code until every file on main has a stated reason to exist.
 
 ### Build path
 
-**Decided (2026-10-11, Sab):**
-- GDAD is GDDP 2.0: same loop, friction removed. Budget ~3k source lines total.
-- Dispatch lives in GDAD, not aa-cli. Two projects was the first mistake.
-- The 9 invariants in AGENTS.md are fixed. Everything written after them is reviewable.
-- Node schema: `why` is the one human-written field. `title`, `depends_on`,
-  `acceptance_criteria[{id,criterion}]`, `constraints`, `milestones` (~2) are the
-  task, agent-draftable, human-admitted. No `status`, `unlocks`, `priority`,
+**Sab said (2026-10-11), paraphrased:**
+- GDAD is GDDP 2.0, not a spinoff: same loop, friction removed, a fraction of the size.
+- Dispatch lives in GDAD, not aa-cli. Splitting across two projects was the first mistake.
+- The 9 invariants carry the most thought and intention. Everything is reviewable.
+- The evaluator's job is drift detection and intent preservation, semantic and
+  functional. It was the one part of GDDP that worked, and its output had no
+  pathway to matter. This time it must.
+- Each node bakes in ~2 milestones for mid-execution read-only evaluator passes;
+  the final verdict after completion has had eyes on the run twice.
+- The evaluator never halts or retries and never edits a node. It may introduce
+  new corrective nodes; they are provisional, not graph truth. Local pass with
+  global failure = original goes provisional, corrective node addresses the rest.
+- The executor is external and owns its lifecycle.
+- `why` as the one human-written field, with the rest of the node as the task,
+  is "an interesting approach". Not decided.
+- Bigger nodes are acceptable; size is not the point.
+- Sab will be vigilant on what gets built, how, and why.
+
+**Agent proposed, unreviewed (do not treat as decided):**
+- Evaluator output is typed (fixed question set, probabilities or enums) rather
+  than free prose, so the frontier and the viewer can read it. The evaluator is
+  an LLM; "typed" constrains only the answer's shape. Seed: `prototypes/shadow-evaluator` questions.
+- Node schema: `title`, `depends_on`, `acceptance_criteria[{id,criterion}]`,
+  `constraints`, `milestones`, plus `why`; no `status`, `unlocks`, `priority`,
   `allowed_execution_modes`, `required_artifacts`, envelope fields.
-- Evaluator: typed closed questions graded against `why` (semantic drift) and
-  breakage (functional drift). Read-only mid-pass at each milestone marker,
-  final typed receipt bound to the attempt SHA. Pass is the only path to
-  provisional. Never halts, retries, or edits a node. May append a corrective
-  node (provisional, with `authored_by`, `triggered_by`, `corrects`). Reject
-  cascades to dependents.
-- Executor is external and owns its lifecycle. It receives milestones in the
-  packet and touches a marker per milestone and on completion.
-- Journal file is the queue and the lock. Receipts are files. Status derives on read.
-- Viewer is shape-shifter-graph, fed by `gdad status --json`. Node creation
-  tooling stays in aa-cli.
+- Executor receives milestones in the packet and marks each one and completion.
+- Journal file as queue and lock; receipts as files; status derived on read.
+- One adapter, a command template. Budget ~3k source lines.
+- Viewer is shape-shifter-graph fed by `gdad status --json`. Node creation stays in aa-cli.
 
 **Open (Sab decides):**
+0. Evaluator trigger at a milestone: (a) clock/poll, GDDP's heartbeat, needs a
+   reconciler; (b) file watcher on marker paths, a daemon; (c) the marker is a
+   command the packet tells the executor to run (`gdad mark <attempt> ms-1`),
+   which journals the milestone and launches the read-only pass. Recommendation:
+   (c); if the executor never marks, the final pass runs with zero observations
+   and says so.
 1. Read GDDP-schema node files tolerantly (ignore extra fields, accept
    `acceptance`/`acceptance_criteria`, `id`/`node_id`) or migrate the 270
    existing nodes. Recommendation: tolerant read first.
