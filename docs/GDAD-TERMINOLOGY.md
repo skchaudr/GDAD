@@ -8,7 +8,7 @@ completed architecture or independently verified vendor specification.
 
 GDAD's relationship to MyGraph is not yet established in this conversation.
 This document does not supersede MyGraph's root product documents. The expansion
-of the acronym GDAD has not been supplied; do not invent one.
+of the acronym GDAD is Graph Driven Agentic Development, per the README.
 
 See [origins and intent](GDAD-ORIGINS.md) for the motivating history.
 

@@ -50,8 +50,8 @@ schema field names change.
 
 ### Resume point
 
-Step 0 below: doc cull and the open decisions, with Sab. No node files and no
-code until every file on main has a stated reason to exist.
+Step 0 done on 2026-10-12: 14 files moved to gitignored `archive/` (tag
+`archive/pre-archive-2026-10-12`). 14 tracked files remain. Next is step 1.
 
 ### Build path
 
@@ -74,14 +74,6 @@ MAJOR CAVEAT ON THIS: this is generally said, none of this supersedes anything i
 - Bigger nodes are acceptable; size is not the point.
 - Sab will be vigilant on what gets built, how, and why.
 
-**Sab said (2026-10-12), paraphrased:**
-- The evaluator is an LLM plus Jev or another typed judge. Typed output on
-  its own is fine; nothing here implies the evaluator is not an LLM.
-- Milestone trigger: ideally the executor itself signals when it hits a
-  milestone. As backup, while a node is active the evaluator polls for
-  milestone completion in case the executor misses it. Still to be dialed in.
-- Nine open decisions was too many; most were not Sab's to make.
-
 **Agent proposed, unreviewed (do not treat as decided):**
 - Node schema: `title`, `depends_on`, `acceptance_criteria[{id,criterion}]`,
   `constraints`, `milestones`, plus `why`; no `status`, `unlocks`, `priority`,
@@ -103,15 +95,7 @@ MAJOR CAVEAT ON THIS: this is generally said, none of this supersedes anything i
 - Corrective-node lifecycle is a granularity call in the node sketch below,
   shown there, not asked.
 
-**Open (Sab decides):**
-1. Dial in the milestone trigger: executor signal plus evaluator backup
-   polling. What the signal is, what the poll reads, and how often.
-2. The doc cull, sequence step 0. One list, approved per file. It covers
-   `docs/transition/` (4 roadmap drafts, ~1000 lines), `docs/observability/`
-   (describes a runtime that violates invariant 7), the three invariants
-   copies (AGENTS.md JSON, `docs/invariants/invariants.md`,
-   `docs/invariants/AGENTS.md`), `prototypes/shadow-evaluator/`,
-   `.pi/workflows/`, and the README-vs-terminology expansion conflict.
+**Open:** none required to start. Trigger mechanics get dialed in when dispatch is built.
 
 **Audit findings (Sonnet, today; full text only in chat):**
 - GDDP schema never grew; all fields present from first commit. `depends_on` and
@@ -157,7 +141,7 @@ timeouts, patch return, gate tokens, export/restore, TTY-gated commands,
 cadence timer, second evaluator lane, second adapter, any new UI.
 
 **Sequence:**
-0. Doc cull (open item 2) and the trigger dial-in (open item 1), with Sab. Every surviving file gets a reason.
+0. Archive files that do not earn a place. Done 2026-10-12.
 1. Sab writes six `why`s. Agent drafts the task fields. Sab admits.
 2. graph-reader, proven against aa-cli's real graph.
 3. dispatch + evaluator, final-pass only, on one real node.
