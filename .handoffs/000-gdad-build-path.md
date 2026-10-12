@@ -55,12 +55,13 @@ code until every file on main has a stated reason to exist.
 
 ### Build path
 
+MAJOR CAVEAT ON THIS: this is generally said, none of this supersedes anything in the invariants, or is assumed to be an interpretation of the invariants. Some or all of this may be refuted or revised at any point. 
+
 **Sab said (2026-10-11), paraphrased:**
-- GDAD is GDDP 2.0, not a spinoff: same loop, friction removed, a fraction of the size.
+- GDAD is GDDP 2.0, how similar is still being determined, but aspects of the loop are coherently the same 
 - Dispatch lives in GDAD, not aa-cli. Splitting across two projects was the first mistake.
-- The 9 invariants carry the most thought and intention. Everything is reviewable.
-- The evaluator's job is drift detection and intent preservation, semantic and
-  functional. It was the one part of GDDP that worked, and its output had no
+- The 9 invariants carry the most thought and intention. Everything is reviewable, so beyond those invariants, all else is questionable and up for removal 
+- The evaluator's job is drift detection and intent preservation, semantic and functional. It was the one part of GDDP that worked, and its output had no
   pathway to matter. This time it must.
 - Each node bakes in ~2 milestones for mid-execution read-only evaluator passes;
   the final verdict after completion has had eyes on the run twice.
