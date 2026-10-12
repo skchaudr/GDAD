@@ -117,7 +117,7 @@ flowchart LR
 | dispatch | frontier → packet (why, criteria, constraints, milestones, marker paths) → one adapter command template; journal line | packet rendered and one node dispatched by hand; executor touches a marker |
 | evaluator | typed questions vs `why`; mid-pass per marker; final receipt bound to SHA; pass → provisional | final-only receipt on a real attempt; mid-passes fire on markers |
 | gate-and-correction | `accept`/`reject` with cascade; evaluator-appended corrective node with lineage, provisional entry | reject cascade exercised; one corrective node on a real drift finding |
-| viewer-feed | `status --json` in the shape shape-shifter-graph reads: nodes, provisional marks, receipts, milestone timeline | static export renders in the viewer; live refresh when a receipt lands |
+| viewer-feed | `status --json` in the shape that shape-shifter-graph reads: nodes, provisional marks, receipts, milestone timeline | static export renders in the viewer; live refresh when a receipt lands |
 | first-run | GDAD's own graph through the loop once: dispatch → markers → eval → visible → accept | one node round-trips; one corrective node round-trips |
 
 Granularity test: a node must carry two milestones under one `why`. Anything
