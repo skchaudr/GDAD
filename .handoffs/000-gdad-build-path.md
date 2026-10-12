@@ -74,38 +74,44 @@ MAJOR CAVEAT ON THIS: this is generally said, none of this supersedes anything i
 - Bigger nodes are acceptable; size is not the point.
 - Sab will be vigilant on what gets built, how, and why.
 
+**Sab said (2026-10-12), paraphrased:**
+- The evaluator is an LLM plus Jev or another typed judge. Typed output on
+  its own is fine; nothing here implies the evaluator is not an LLM.
+- Milestone trigger: ideally the executor itself signals when it hits a
+  milestone. As backup, while a node is active the evaluator polls for
+  milestone completion in case the executor misses it. Still to be dialed in.
+- Nine open decisions was too many; most were not Sab's to make.
+
 **Agent proposed, unreviewed (do not treat as decided):**
-- Evaluator output is typed (fixed question set, probabilities or enums) rather
-  than free prose, so the frontier and the viewer can read it. The evaluator is
-  an LLM; "typed" constrains only the answer's shape. Seed: `prototypes/shadow-evaluator` questions.
 - Node schema: `title`, `depends_on`, `acceptance_criteria[{id,criterion}]`,
   `constraints`, `milestones`, plus `why`; no `status`, `unlocks`, `priority`,
   `allowed_execution_modes`, `required_artifacts`, envelope fields.
-- Executor receives milestones in the packet and marks each one and completion.
+- Executor receives milestones in the packet and marks each one and completion
+  through the same mechanism.
 - Journal file as queue and lock; receipts as files; status derived on read.
 - One adapter, a command template. Budget ~3k source lines.
 - Viewer is shape-shifter-graph fed by `gdad status --json`. Node creation stays in aa-cli.
 
+**Agent defaults (strike a line to override; none of these need a decision):**
+- Read the existing GDDP-schema node files as they sit: accept `id`/`node_id`
+  and `acceptance`/`acceptance_criteria`, ignore `status`, `priority`,
+  `unlocks` and envelope fields. No migration script for the 270 nodes.
+- Completion is a done marker from the executor, the same mechanism as the
+  milestone marker. No worktree-quiescence guessing.
+- Whether `why` gets checked at all is part of the undecided why-as-human-field
+  approach, not its own question.
+- Corrective-node lifecycle is a granularity call in the node sketch below,
+  shown there, not asked.
+
 **Open (Sab decides):**
-0. Evaluator trigger at a milestone: (a) clock/poll, GDDP's heartbeat, needs a
-   reconciler; (b) file watcher on marker paths, a daemon; (c) the marker is a
-   command the packet tells the executor to run (`gdad mark <attempt> ms-1`),
-   which journals the milestone and launches the read-only pass. Recommendation:
-   (c); if the executor never marks, the final pass runs with zero observations
-   and says so.
-1. Read GDDP-schema node files tolerantly (ignore extra fields, accept
-   `acceptance`/`acceptance_criteria`, `id`/`node_id`) or migrate the 270
-   existing nodes. Recommendation: tolerant read first.
-2. `why` enforcement: none, evaluator-judged, or length rule.
-3. Completion signal: done marker (recommended) vs worktree quiescence.
-4. Corrective-node lifecycle: own node, or part of evaluator + gate.
-5. Fate of `docs/transition/` (4 roadmap drafts, ~1000 lines) and
-   `docs/observability/` (describes a runtime that violates invariant 7).
-6. Which invariants copy stays: AGENTS.md JSON, `docs/invariants/invariants.md`
-   prose, or `docs/invariants/AGENTS.md` projection. Three today.
-7. Fate of `prototypes/shadow-evaluator/` (question set is the evaluator seed;
-   code targets old GDDP receipts) and `.pi/workflows/` (practice, undocumented).
-8. README expands GDAD; terminology doc says don't. One wins.
+1. Dial in the milestone trigger: executor signal plus evaluator backup
+   polling. What the signal is, what the poll reads, and how often.
+2. The doc cull, sequence step 0. One list, approved per file. It covers
+   `docs/transition/` (4 roadmap drafts, ~1000 lines), `docs/observability/`
+   (describes a runtime that violates invariant 7), the three invariants
+   copies (AGENTS.md JSON, `docs/invariants/invariants.md`,
+   `docs/invariants/AGENTS.md`), `prototypes/shadow-evaluator/`,
+   `.pi/workflows/`, and the README-vs-terminology expansion conflict.
 
 **Audit findings (Sonnet, today; full text only in chat):**
 - GDDP schema never grew; all fields present from first commit. `depends_on` and
@@ -151,7 +157,7 @@ timeouts, patch return, gate tokens, export/restore, TTY-gated commands,
 cadence timer, second evaluator lane, second adapter, any new UI.
 
 **Sequence:**
-0. Doc cull + open decisions 1–8, with Sab. Every surviving file gets a reason.
+0. Doc cull (open item 2) and the trigger dial-in (open item 1), with Sab. Every surviving file gets a reason.
 1. Sab writes six `why`s. Agent drafts the task fields. Sab admits.
 2. graph-reader, proven against aa-cli's real graph.
 3. dispatch + evaluator, final-pass only, on one real node.
