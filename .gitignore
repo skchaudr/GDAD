@@ -10,3 +10,6 @@ coverage/
 .shadow/
 __pycache__/
 .pi-hawk/
+
+# archived files: kept on disk, out of the tree; tag archive/pre-archive-2026-10-12 has them
+archive/
