@@ -10,3 +10,5 @@ Graph Driven Agentic Development - taking the lessons away from the first attemp
 s what, agents determine how' but the unforessen pitfall was that the agent's 'how' ended up modifying and determining the 'what.' With that established, this attempt is now changing up the entire approach; the driving principles this time will be around disciplined ownership over the human-in-the-loop review time, and investing early in improving observability and ending the black box relationship between when an agent starts and finishes its work.
 
 **The goal: make it safe to not be watching.**
+
+Why that goal: [the blackbox failure](docs/GDAD-BLACKBOX-FAILURE.md), GDDP's observability failure with evidence.
