@@ -51,7 +51,7 @@ schema field names change.
 ### Resume point
 
 Step 0 done on 2026-10-12: 14 files moved to gitignored `archive/` (tag
-`archive/pre-archive-2026-10-12`). 14 tracked files remain. Next is step 1.
+`archive/pre-archive-2026-10-12`). 14 tracked files remain. Sab sets what comes next.
 
 ### Build path
 
@@ -139,14 +139,6 @@ that can't is a milestone of another node. Six is the expected count; fewer is f
 **Not being built:** job database, adapter hierarchy, executor supervision or
 timeouts, patch return, gate tokens, export/restore, TTY-gated commands,
 cadence timer, second evaluator lane, second adapter, any new UI.
-
-**Sequence:**
-0. Archive files that do not earn a place. Done 2026-10-12.
-1. Sab writes six `why`s. Agent drafts the task fields. Sab admits.
-2. graph-reader, proven against aa-cli's real graph.
-3. dispatch + evaluator, final-pass only, on one real node.
-4. viewer-feed, so step 5 is watched from the viewer not from chat.
-5. first-run. Mid-passes and corrective nodes land here, not before.
 
 ------------------------------------------------ Agent Section END
 
