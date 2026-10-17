@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """GDAD graph reader.
-
+Unfortunately this was not approved to be written, uses an old unapproved schema, and in general assumes a lot. 
+It can still be used, but it should be treated as canonical or foundational (yet). 
 Usage: gdad.py NODE_DIR
 
 Reads a directory of GDDP-schema node YAML files as they sit, validates the
