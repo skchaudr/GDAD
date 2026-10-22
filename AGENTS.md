@@ -6,6 +6,8 @@ The end result is that bad architecture and assumptions get built upon and never
 
 2. The project should be machine-agnostic; the ideal goal is cross-platform, portable to different operating systems. Crucially, cross-platform could achieved easily, but deployment  could be a tedious endeavor; it should be portable enough that less than 10 mins setup is required to get it running on a new machine. That doesn't mean that it's going to be working at its full luxury niceties, that's on the user and the config environment, but the core loop and core capability is non-negotiable. 
 
+A separate CLAUDE.md will be made, but first and foremost, Claude memory is unreliable. It is the epitome of "a little information is dangerous" because it is just a big enough snapshot in time that it gives Claude confidence in its claims. 
+Claude memory is basically compaction-as-source-of-truth and like Hermes skills, is only as good as the capture itself (which is constantly misinterpreted). 
 
 --- 
 
