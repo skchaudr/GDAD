@@ -12,3 +12,9 @@ s what, agents determine how' but the unforessen pitfall was that the agent's 'h
 **The goal: make it safe to not be watching.**
 
 Why that goal: [the blackbox failure](docs/GDAD-BLACKBOX-FAILURE.md), GDDP's observability failure with evidence.
+
+## State-machine walkthrough
+
+The [TypeScript review model](model/README.md) runs locally with XState and prints
+scenario transitions and records. The machine lives in this repository; Stately
+is an optional drawing board. This is a contract simulation, not the v0 execution loop.
